@@ -1,16 +1,15 @@
 #!/bin/bash
 # This script is to create an AWS CodeDeploy deployment.
-# Author: Jayden Aung
 
 # UPDATE THE FOLLOWING VARIABLES ACCORDING TO YOUR ENV.
-APPNAME="portfolio_app"
+APPNAME="devlax-portfolio"
 DCONFIG="CodeDeployDefault.AllAtOnce"
 DGNAME="cd_dg1"
 DESCRIPTION="Portfolio Deployment"
 BUCKET="devlax-portfolio.com"
-ETAG="Devlax"
+ETAG="a1e11e9b0b41ec699033305d003496c8"
 BUNDLETYPE="zip"
-KEY="portfolio_app.zip"
+KEY="dist.zip"
 REGION="eu-central-1"
 
 aws deploy create-deployment \
