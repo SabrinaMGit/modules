@@ -1,13 +1,13 @@
-resource "aws_codedeploy_app" "demo_app" {
-  name             = "demo_app"
+resource "aws_codedeploy_app" "portfolio_app" {
+  name             = "portfolio_app"
   compute_platform = "Server"
 }
 
-resource "aws_sns_topic" "demo_sns_topic" {
-  name = "demo_sns_topic"
+resource "aws_sns_topic" "portfolio_sns_topic" {
+  name = "portfolio_sns_topic"
 }
 
-resource "aws_codedeploy_deployment_config" "demo_config" {
+resource "aws_codedeploy_deployment_config" "portfolio_config" {
   deployment_config_name = "CodeDeployDefault2.EC2AllAtOnce"
   
   #traffic_routing_config {
@@ -22,7 +22,7 @@ resource "aws_codedeploy_deployment_config" "demo_config" {
 }
 
 resource "aws_codedeploy_deployment_group" "cd_dg1" {
-  app_name              = aws_codedeploy_app.demo_app.name
+  app_name              = aws_codedeploy_app.portfolio_app.name
   deployment_group_name = "cd_dg1"
   service_role_arn      = aws_iam_role.devops_codedeploy_role.arn
 
@@ -31,7 +31,7 @@ resource "aws_codedeploy_deployment_group" "cd_dg1" {
     trigger_events = ["DeploymentFailure", "DeploymentSuccess", "DeploymentFailure", "DeploymentStop",
     "InstanceStart", "InstanceSuccess", "InstanceFailure"]
     trigger_name       = "event-trigger"
-    trigger_target_arn = aws_sns_topic.demo_sns_topic.arn
+    trigger_target_arn = aws_sns_topic.portfolio_sns_topic.arn
   }
 
   auto_rollback_configuration {

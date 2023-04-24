@@ -1,14 +1,14 @@
 resource "aws_launch_configuration" "web_launch_conf" {
   name_prefix          = "devops-"
-  image_id             = var.ubuntu_18_sg
+  image_id             = data.aws_ami.ubuntu.id
+  # data.aws_ami.ubuntu.id
   iam_instance_profile = aws_iam_instance_profile.ec2_cd_instance_profile.name
-  # image_id                    = data.aws_ami.ubuntu.id
-  instance_type               = "t2.micro"
-  key_name                    = var.key_name
+  instance_type               = var.instance_type
+  key_name                    = var.AWS_ACCESS_KEY_ID
   security_groups             = [aws_security_group.asg_web_sg.id]
   associate_public_ip_address = true
 
-  user_data = file("codedeploy_agent_install.sh")
+  user_data = file("/scripts/codedeploy_agent_install.sh")
 
   lifecycle {
     create_before_destroy = true

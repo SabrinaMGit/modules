@@ -1,17 +1,16 @@
 #!/bin/bash
 # This script is to create an AWS CodeDeploy deployment.
-# Author: Jayden Aung
 
 # UPDATE THE FOLLOWING VARIABLES ACCORDING TO YOUR ENV.
-APPNAME="deom_app"
+APPNAME="portfolio_app"
 DCONFIG="CodeDeployDefault.AllAtOnce"
 DGNAME="cd_dg1"
-DESCRIPTION="Demo Deployment"
+DESCRIPTION="Portfolio Deployment"
 BUCKET="S3Bucket Name"
 ETAG="ETAG's NAME"
 BUNDLETYPE="zip"
-KEY="demo_app.zip"
-REGION="ap-southeast-1"
+KEY="portfolio_app.zip"
+REGION="eu-central-1"
 
 aws deploy create-deployment \
     --application-name ${APPNAME} \
