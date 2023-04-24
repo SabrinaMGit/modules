@@ -1,14 +1,14 @@
 resource "aws_launch_configuration" "web_launch_conf" {
   name_prefix          = "devops-"
   image_id             = data.aws_ami.ubuntu.id
-  # data.aws_ami.ubuntu.id
   iam_instance_profile = aws_iam_instance_profile.ec2_cd_instance_profile.name
-  instance_type               = var.instance_type
-  key_name                    = var.AWS_ACCESS_KEY_ID
+  # image_id                    = data.aws_ami.ubuntu.id
+  instance_type               = "t2.micro"
+  key_name                    = var.key_name
   security_groups             = [aws_security_group.asg_web_sg.id]
   associate_public_ip_address = true
 
-  user_data = file("scripts/codedeploy_agent_install.sh")
+  user_data = file("codedeploy_agent_install.sh")
 
   lifecycle {
     create_before_destroy = true
@@ -16,16 +16,14 @@ resource "aws_launch_configuration" "web_launch_conf" {
 }
 
 resource "aws_autoscaling_group" "devops_web_asg" {
-  name                 = "devops_web_asg"
+  name                 = "devops_portfolio_autog"
   launch_configuration = aws_launch_configuration.web_launch_conf.name
   min_size             = 3
   desired_capacity     = 3
   max_size             = 5
   health_check_type    = "EC2"
   #availability_zones   = ["ap-southeast-1a", "ap-southeast-1b", "ap-southeast-1c"]
-  target_group_arns = [
-    aws_lb_target_group.external_alb_tg_app1.arn
-  ]
+  target_group_arns = ["${aws_lb_target_group.external_alb_tg_app1.arn}"]
   enabled_metrics = [
     "GroupMinSize",
     "GroupMaxSize",

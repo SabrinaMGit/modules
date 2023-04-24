@@ -1,12 +1,5 @@
-# IntelliJ metadata directory
-.idea
-.DS_Store
-
 # Local .terraform directories
 **/.terraform/*
-**/.terraform/
-
-.terraform.lock.hcl
 
 # .tfstate files
 *.tfstate
@@ -35,22 +28,8 @@ override.tf.json
 # Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
 # example: *tfplan*
 
-# Ignore kubeconfig files, at least for now
-kubeconfig/
-kubeconfig/*
-
-
-# Ignore istio install dir
-**/istio-1.2.0/*
-
-# ignore Direnv Konfig
-.envrc
-
-**/kube-web-view-*.tgz
-
-git-cliff*
-git-cliff
-terraform-docs*
-LICENSE
-
-.pre-commit-config.yaml
+*.tfvars
+*.x
+.vscode/settings.json
+.archive
+.DS_Store

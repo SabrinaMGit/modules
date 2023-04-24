@@ -1,0 +1,36 @@
+include:
+  - project: 'wp3/shared/gitlab-ci-templates'
+    ref: master
+    file:
+      - '/terraform/.build.yml'
+
+default:
+  tags:
+    - aws
+
+variables:
+  AWS_RUNNER: "true"
+  TERRAFORM_INIT_LOCKFILE_READONLY: "false"
+
+
+########################
+#         JOBS         #
+########################
+
+wp3_plan:
+  extends: .terraform-plan
+  resource_group: wp3
+  artifacts:
+    name: wp3
+
+wp3_apply:
+  extends: .terraform-apply
+  resource_group: wp3
+  needs:
+    - job: wp3_plan
+      artifacts: true
+
+wp3_terraform-force-unlock:
+  extends: .terraform-force-unlock
+
+#aws s3 cp /output/public s3://yourdomain.com --recursive

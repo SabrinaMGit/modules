@@ -3,8 +3,16 @@ variable "project_name" {
   default     = "devops-portfolio"
 }
 
+variable "bucket_name" {
+  default = "devlax-portfolio.com"
+}
+
 variable "region" {
   default = "eu-central-1"
+}
+
+variable "subnet_cdir" {
+  default = "10.0.0.0/16"
 }
 
 variable "instance_type" {
@@ -57,7 +65,7 @@ variable "AWS_SECRET_ACCESS_KEY" {
 
 variable "devops_sg_cidr_vpc" {
   description = "The IPv4 CIDR block for the VPC"
-  default = "10.0.0.0/16"
+  default = "10.194.0.0/24"
 }
 # variable "sydney_master_key_arn" {}
 # variable "aws_linux_ami_sg" {}
