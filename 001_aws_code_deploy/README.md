@@ -237,10 +237,5 @@ terraform destroy
 
 This will delete everything that has been created by Terraform. 
 
----
-Hope you've enjoyed this. Happy  Terraforming on AWS! 
-
-Best, \
-Jayden Aung
 
 
